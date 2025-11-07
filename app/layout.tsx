@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono, Roboto } from "next/font/google";
 import "./globals.css";
+import { Toaster } from "sonner";
 import Navbar from "@/components/Navbar";
 
 const geistSans = Geist({
@@ -9,8 +10,8 @@ const geistSans = Geist({
 });
 
 const roboto = Roboto({
-    variable: "--font-roboto",
-    subsets: ["latin"],
+  variable: "--font-roboto",
+  subsets: ["latin"],
 });
 
 const geistMono = Geist_Mono({
@@ -30,12 +31,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body
-        className={`${geistSans.variable} ${roboto.variable} antialiased`}
-      >
-
-      <Navbar/>
+      <body className={`${geistSans.variable} ${roboto.variable} antialiased`}>
+        <Navbar />
         {children}
+        <Toaster position="top-right" richColors />
       </body>
     </html>
   );
