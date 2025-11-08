@@ -6,6 +6,7 @@ import React, { useEffect, useState } from "react";
 import GetStarted from "./get-started/page";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
+import Navbar from "@/components/Navbar";
 
 const App = () => {
   const { user, isAdmin, loading } = useUser();
@@ -13,6 +14,7 @@ const App = () => {
   if (loading) return <p>Loading...</p>;
 
   return (
+
     <div>
       {user ? (
         <>
@@ -29,7 +31,7 @@ const App = () => {
         </>
       ) : (
         <div>
-          <GetStarted />
+          {/*<GetStarted />*/}
           <Homepage />
         </div>
       )}
