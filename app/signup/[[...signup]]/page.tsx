@@ -61,7 +61,7 @@ export default function SignUpForm() {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-orange-400">
+    <div className="min-h-screen flex items-center justify-center bg-orange-100">
       <Card className="w-full max-w-md shadow-2xl bg-white/90 backdrop-blur rounded-2xl">
         <CardHeader className="text-center">
           <CardTitle className="text-2xl font-bold text-gray-800">
