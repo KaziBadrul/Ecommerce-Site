@@ -3,6 +3,8 @@
 import { useUser } from "@/hooks/useUser";
 import { useEffect } from "react";
 import { useRouter } from "next/navigation";
+import AdminDashboard from "@/components/AdminDashboard";
+import Sidebar from "@/components/Sidebar";
 
 export default function AdminPage() {
   const { user, isAdmin, loading } = useUser();
@@ -18,9 +20,14 @@ export default function AdminPage() {
   if (!user || !isAdmin) return null;
 
   return (
-    <div className="p-4">
-      <h1 className="text-2xl font-bold mb-4">Admin Dashboard</h1>
-      <p>Welcome, admin! You can manage products and users here.</p>
+    <div className="flex">
+      {/* Sidebar */}
+      <Sidebar />
+
+      {/* Main Content */}
+      <main className="ml-64 flex-1 p-6 bg-gray-50 min-h-screen">
+        <AdminDashboard />
+      </main>
     </div>
   );
 }
