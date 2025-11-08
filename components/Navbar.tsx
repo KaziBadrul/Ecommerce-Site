@@ -8,10 +8,12 @@ import { Button } from "@/components/ui/button";
 
 import React from "react";
 
+
 export default function Navbar() {
-    const { user, loading } = useUser();
+    const { user } = useUser();
+
     return (
-        <header className="bg-white w-full h-20 flex flex-row items-center justify-center px-6 py-2 shadow-md">
+        <header className="bg-white w-full h-20 flex flex-row items-center justify-center px-6 py-2 shadow-md sticky top-0 z-50">
             <nav className="w-full h-full flex flex-row items-center justify-between max-h-[1200px]">
 
                 <div className="h-full flex flex-row items-center">
@@ -36,22 +38,23 @@ export default function Navbar() {
 
 
                         <div className="h-full flex flex-row items-center">
-                            {loading ? (
-                                <p className="text-gray-400">...</p>
-                            ) : user ? (
-                                <Button
-                                    onClick={async () => {
-                                        await supabase.auth.signOut();
-                                        window.location.reload();
-                                    }}
-                                >
-                                    <p>Logout</p>
-                                </Button>
+                            {user ? (
+                                <>
+                                    <Button
+                                        onClick={async () => {
+                                            await supabase.auth.signOut();
+                                            window.location.reload();
+                                        }}
+                                    >
+                                        <p>Logout</p>
+                                    </Button>
+                                </>
                             ) : (
                                 <Link href="/login">
                                     <Button><p>Login</p></Button>
                                 </Link>
                             )}
+
                         </div>
                     </div>
                 </div>
