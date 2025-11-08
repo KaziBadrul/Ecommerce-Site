@@ -4,18 +4,17 @@ import { usePathname } from "next/navigation";
 import Navbar from "@/components/Navbar";
 
 export default function ClientLayout({
-                                         children,
-                                     }: {
-    children: React.ReactNode;
+  children,
+}: {
+  children: React.ReactNode;
 }) {
-    const pathname = usePathname();
+  const pathname = usePathname();
 
-    return (
-        <>
+  return (
+    <>
+      {!pathname.startsWith("/login") && <Navbar />}
 
-            {!pathname.startsWith("/login") && <Navbar />}
-
-            {children}
-        </>
-    );
+      {children}
+    </>
+  );
 }
