@@ -117,27 +117,16 @@
     @apply border-border outline-ring/50;
   }
   body {
-    @apply bg-background text-foreground;
+    @apply bg-[#ffdd7d];
   }
+
+    p{
+        @apply font-roboto m-0;
+    }
+
 }
 
 
 
 
-@layer components {
-    header {
-        @apply flex flex-row justify-center items-center w-full h-25 px-8 py-4 sticky top-0 z-50 bg-orange-400;
-    }
 
-    header nav {
-        @apply h-full w-full bg-orange-400 flex flex-row justify-between  relative;
-    }
-
-    header .logo {
-        @apply flex flex-row items-center h-full;
-    }
-
-    header ul {
-        @apply flex flex-row items-center gap-6 font-bold font-roboto text-white;
-    }
-}
