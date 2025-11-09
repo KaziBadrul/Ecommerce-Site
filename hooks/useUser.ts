@@ -1,4 +1,3 @@
-// hooks/useUser.ts
 "use client";
 
 import { useEffect, useState } from "react";
@@ -11,13 +10,18 @@ export function useUser() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const init = async () => {
+    let mounted = true;
+
+    const fetchUser = async () => {
       setLoading(true);
 
       const {
         data: { session },
       } = await supabase.auth.getSession();
+
       const currentUser = session?.user ?? null;
+      if (!mounted) return;
+
       setUser(currentUser);
 
       if (currentUser) {
@@ -27,21 +31,27 @@ export function useUser() {
           .eq("id", currentUser.id)
           .single();
 
-        if (error) {
-          console.error("Profile fetch error:", error.message);
-        } else {
+        if (!mounted) return;
+
+        if (!error) {
           setIsAdmin(!!profile?.is_admin);
+        } else {
+          console.error("Profile fetch error:", error.message);
         }
+      } else {
+        setIsAdmin(false);
       }
 
       setLoading(false);
     };
 
-    init();
+    fetchUser();
 
     const { data: listener } = supabase.auth.onAuthStateChange(
       async (_event, session) => {
         const currentUser = session?.user ?? null;
+        if (!mounted) return;
+
         setUser(currentUser);
 
         if (currentUser) {
@@ -50,6 +60,9 @@ export function useUser() {
             .select("is_admin")
             .eq("id", currentUser.id)
             .single();
+
+          if (!mounted) return;
+
           setIsAdmin(!!profile?.is_admin);
         } else {
           setIsAdmin(false);
@@ -57,7 +70,10 @@ export function useUser() {
       }
     );
 
-    return () => listener.subscription.unsubscribe();
+    return () => {
+      mounted = false;
+      listener.subscription.unsubscribe();
+    };
   }, []);
 
   return { user, isAdmin, loading };
