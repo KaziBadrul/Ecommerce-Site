@@ -1,13 +1,14 @@
 "use client";
 
 import { useUser } from "@/hooks/useUser";
-import { useEffect } from "react";
+import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import AdminDashboard from "@/components/AdminDashboard";
 import Sidebar from "@/components/Sidebar";
 
 export default function AdminPage() {
   const { user, isAdmin, loading } = useUser();
+  const [selectedMenuItem, setSelectedMenuItem] = useState("dashboard");
   const router = useRouter();
 
   useEffect(() => {
@@ -22,11 +23,11 @@ export default function AdminPage() {
   return (
     <div className="flex">
       {/* Sidebar */}
-      <Sidebar />
+      <Sidebar selected={selectedMenuItem} onSelect={setSelectedMenuItem} />
 
       {/* Main Content */}
       <main className="ml-64 flex-1 p-6 bg-gray-50 min-h-screen">
-        <AdminDashboard />
+        <AdminDashboard selected={selectedMenuItem} />
       </main>
     </div>
   );

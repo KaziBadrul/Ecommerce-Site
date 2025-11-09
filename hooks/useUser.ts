@@ -3,11 +3,13 @@
 import { useEffect, useState } from "react";
 import { supabase } from "@/lib/supabaseClient";
 import type { User } from "@supabase/supabase-js";
+import { useRouter } from "next/navigation";
 
 export function useUser() {
   const [user, setUser] = useState<User | null>(null);
   const [isAdmin, setIsAdmin] = useState(false);
   const [loading, setLoading] = useState(true);
+  const router = useRouter();
 
   useEffect(() => {
     let mounted = true;
@@ -31,11 +33,14 @@ export function useUser() {
           .eq("id", currentUser.id)
           .single();
 
-        if (!mounted) return;
+        if (!mounted) {
+          return;
+        }
 
         if (!error) {
           setIsAdmin(!!profile?.is_admin);
         } else {
+          console.log("Error fetching profile:", error);
           console.error("Profile fetch error:", error.message);
         }
       } else {
