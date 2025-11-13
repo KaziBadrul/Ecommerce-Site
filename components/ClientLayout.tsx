@@ -2,19 +2,27 @@
 
 import { usePathname } from "next/navigation";
 import Navbar from "@/components/Navbar";
+import Footer from "@/components/Footer"; // Import the Footer
 
 export default function ClientLayout({
-  children,
-}: {
-  children: React.ReactNode;
+                                         children,
+                                     }: {
+    children: React.ReactNode;
 }) {
-  const pathname = usePathname();
+    const pathname = usePathname();
 
-  return (
-    <>
-      {!pathname.startsWith("/login") && <Navbar />}
+    const hideNavbarFooter = pathname.startsWith("/login");
 
-      {children}
-    </>
-  );
+    return (
+        <>
+
+            {!hideNavbarFooter && <Navbar />}
+
+
+            <main className="min-h-[calc(100vh-64px)]">{children}</main>
+
+
+            {!hideNavbarFooter && <Footer />}
+        </>
+    );
 }
