@@ -52,7 +52,7 @@ const Footer = () => {
 
 
                 <div className="flex flex-col md:flex-row justify-between items-center text-gray-500 text-sm">
-                    <p>© {new Date().getFullYear()} MyE-Mall. All rights reserved.</p>
+                    <p>© {new Date().getFullYear()} Shop. All rights reserved.</p>
                     <div className="flex gap-6 mt-2 md:mt-0">
                         <a href="#" className="hover:text-white transition-colors">Privacy Policy</a>
                         <a href="#" className="hover:text-white transition-colors">Terms of Service</a>
