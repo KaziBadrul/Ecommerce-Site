@@ -24,7 +24,7 @@ export default function Navbar() {
       <nav className="flex items-center justify-between w-full max-w-7xl mx-auto">
         {/* LOGO */}
         <Link href="/" className="flex items-center gap-2">
-          <Image src="/logo2.png" alt="Logo" width={50} height={50} />
+          <Image src="/logo-new.svg" alt="Logo" width={50} height={50} />
         </Link>
 
         {/* DESKTOP MENU */}
