@@ -14,12 +14,11 @@ import { Search, ShoppingCart, User, X, Menu } from "lucide-react";
 export default function Navbar() {
   const { user, isAdmin } = useUser();
   const router = useRouter();
+  const [searchOpen, setSearchOpen] = useState(false);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   const isAdminRoute = usePathname().startsWith("/admin");
   if (isAdminRoute) return null; // Hide navbar on admin routes
-
-  const [searchOpen, setSearchOpen] = useState(false);
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   return (
     <header className="bg-white/80 backdrop-blur-md w-full h-20 flex items-center px-6 shadow-sm border-b sticky top-0 z-50">
