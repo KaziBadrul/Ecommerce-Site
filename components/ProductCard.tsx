@@ -1,4 +1,5 @@
 import Image from "next/image";
+import {addToCart} from "@/utils/addToCart";
 
 interface Props {
   name: string;
@@ -9,7 +10,13 @@ interface Props {
 
 const ProductCard = ({ name, image, slug, price }: Props) => {
   return (
-    <div className="w-[20rem] h-[28rem] bg-[#d9d9d9] rounded-3xl flex flex-col items-center justify-center px-6 py-4 transform transition-all duration-300 ease-in-out hover:bg-[#8c8b8b]">
+    <div onClick={() => addToCart({name, image, slug, price})} className="w-[20rem] h-[28rem]
+    bg-[#d9d9d9] rounded-3xl
+    flex flex-col items-center
+    justify-center px-6 py-4
+    transform transition-all duration-300 ease-in-out
+    hover:bg-[#8c8b8b]
+    ">
       <div className="w-full h-[300px] flex items-center justify-center relative">
         <Image
           src={image}
