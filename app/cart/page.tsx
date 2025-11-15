@@ -3,6 +3,7 @@
 import Image from "next/image";
 import { useState, useEffect, useMemo } from "react";
 import { CartProduct } from "@/lib/products";
+import Link from "next/link";
 
 const CartPage = () => {
     const [cartItems, setCartItems] = useState<CartProduct[]>(() => {
@@ -156,14 +157,16 @@ const CartPage = () => {
                         <span>{formatPrice(subtotal)}</span>
                     </div>
 
-                    <button
-                        disabled={cartItems.length === 0}
-                        className={`w-full py-3 rounded-xl text-sm font-medium mb-3 ${
-                            cartItems.length === 0 ? "bg-gray-400 cursor-not-allowed" : "bg-[#115acf] transition-colors duration-200 hover:bg-[#184a99] text-white cursor-pointer"
-                        }`}
-                    >
-                        <p>Checkout</p>
-                    </button>
+                    <Link href="/cart/checkout">
+                        <button
+                            disabled={cartItems.length === 0}
+                            className={`w-full py-3 rounded-xl text-sm font-medium mb-3 ${
+                                cartItems.length === 0 ? "bg-gray-400 cursor-not-allowed" : "bg-[#115acf] transition-colors duration-200 hover:bg-[#184a99] text-white cursor-pointer"
+                            }`}
+                            >
+                            <p>Checkout</p>
+                        </button>
+                    </Link>
 
                     <a href="#" className="text-sm underline text-gray-600">
                         Use a promo code
