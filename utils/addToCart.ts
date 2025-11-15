@@ -10,7 +10,6 @@ export function addToCart(product: Product) {
 
     if (existingItem) {
         existingItem.quantity += 1;
-        existingItem.price += existingItem.price;
     } else {
 
         cart.push({...product, quantity:1});

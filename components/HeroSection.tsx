@@ -3,6 +3,7 @@
 import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 import { useState, useEffect } from "react";
+import {addToCart} from "@/utils/addToCart";
 
 const jackets = [
   {
@@ -87,6 +88,7 @@ export default function HeroSection() {
           <motion.button
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.97 }}
+            onClick={() => addToCart({name:jacket.subtitle,price: jacket.price,image:jacket.image, slug:jacket.title})}
             className="mt-6 px-7 py-3 bg-[#115acf] text-white rounded-full text-lg font-semibold transition-all duration-300 hover:bg-[#0a3c8c] cursor-pointer"
           >
               <p>Add to Cart</p>

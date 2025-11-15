@@ -93,20 +93,20 @@ export default function Navbar() {
           {user && isAdmin && !isAdminRoute && (
             <Button
               variant="outline"
-              className="border-orange-400 text-orange-500 hover:bg-orange-50"
+              className="border-[#115acf] cursor-pointer text-blue-400 hover:bg-blue-50"
               onClick={() => router.push("/admin")}
             >
-              Admin Panel
+                <p>Admin Panel</p>
             </Button>
           )}
 
           {user && isAdmin && isAdminRoute && (
             <Button
               variant="outline"
-              className="border-orange-400 text-orange-500 hover:bg-orange-50"
+              className="border-[#115acf] cursor-pointer text-blue-400 hover:bg-blue-50"
               onClick={() => router.push("/")}
             >
-              Shop Page
+                <p>Shop Page</p>
             </Button>
           )}
 

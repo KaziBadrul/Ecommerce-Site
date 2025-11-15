@@ -56,11 +56,13 @@ const CartPage = () => {
         <main className="min-h-screen w-full p-6 lg:p-10 flex justify-center">
             <section className="w-full max-w-7xl grid grid-cols-1 lg:grid-cols-3 gap-10">
                 {/* Cart Items Section */}
-                <section className="lg:col-span-2 bg-white rounded-2xl p-6 shadow-sm">
-                    <h1 className="text-2xl font-semibold mb-6">Your Cart</h1>
+                <section className=" border-double border-6 border-[#115acf] lg:col-span-2 bg-white rounded-2xl p-6 shadow-sm">
+                    <div className="w-full h-fit flex items-center justify-center"><h1 className="text-2xl font-semibold mb-6 font-poppins">Your Cart</h1></div>
 
                     {cartItems.length === 0 ? (
-                        <p className="text-gray-500">Your cart is empty.</p>
+                        <div className="w-full h-[500px] flex items-center justify-center">
+                            <p className="text-gray-500 text-lg font-extrabold">Your cart is empty.</p>
+                        </div>
                     ) : (
                         cartItems.map(item => (
                             <article key={item.slug} className="flex items-start gap-4 py-6 border-b">
@@ -74,7 +76,7 @@ const CartPage = () => {
                                         <button
                                             aria-label={`Delete ${item.name}`}
                                             onClick={() => deleteItem(item.slug)}
-                                            className="w-fit h-fit"
+                                            className="w-fit h-fit hover:scale-150 transition-transform duration-200 flex items-center justify-center cursor-pointer"
                                         >
                                             <Image
                                                 src="/cart-icons/delete.svg"
@@ -95,7 +97,7 @@ const CartPage = () => {
                                         <button
                                             aria-label={`Decrease quantity of ${item.name}`}
                                             onClick={() => decreaseQuantity(item.slug)}
-                                            className="w-fit h-fit flex items-center justify-center"
+                                            className="w-fit h-fit hover:scale-105 transition-transform duration-200 flex items-center justify-center cursor-pointer"
                                         >
                                             <Image
                                                 src="/cart-icons/minus.svg"
@@ -113,7 +115,7 @@ const CartPage = () => {
                                         <button
                                             aria-label={`Increase quantity of ${item.name}`}
                                             onClick={() => increaseQuantity(item.slug)}
-                                            className="w-fit h-fit flex items-center justify-center"
+                                            className="w-fit h-fit hover:scale-105 transition-transform duration-200 flex items-center justify-center cursor-pointer"
                                         >
                                             <Image
                                                 src="/cart-icons/plus.svg"
@@ -157,10 +159,10 @@ const CartPage = () => {
                     <button
                         disabled={cartItems.length === 0}
                         className={`w-full py-3 rounded-xl text-sm font-medium mb-3 ${
-                            cartItems.length === 0 ? "bg-gray-400 cursor-not-allowed" : "bg-black text-white"
+                            cartItems.length === 0 ? "bg-gray-400 cursor-not-allowed" : "bg-[#115acf] transition-colors duration-200 hover:bg-[#184a99] text-white cursor-pointer"
                         }`}
                     >
-                        Checkout
+                        <p>Checkout</p>
                     </button>
 
                     <a href="#" className="text-sm underline text-gray-600">
