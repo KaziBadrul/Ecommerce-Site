@@ -13,6 +13,13 @@ export default function Navbar() {
   const { user } = useUser();
   const router = useRouter();
 
+  const isCurrentPathAdmin = usePathname().startsWith("/admin");
+
+  const [searchOpen, setSearchOpen] = useState(false);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+
+  // New Navbar
+
   return (
     <header className="bg-white w-full h-20 flex flex-row items-center justify-center px-6 py-2 shadow-md sticky top-0 z-50">
       <nav className="w-full h-full flex flex-row items-center justify-between max-h-[1200px]">
