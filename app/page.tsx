@@ -2,6 +2,7 @@ import HeroSection from "@/components/HeroSection";
 import ProductCarousel from "@/components/ProductCarousel";
 import Image from "next/image";
 
+
 const App = () => {
   return (
     <main className="py-2 bg-gray-100">
