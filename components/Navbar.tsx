@@ -74,7 +74,9 @@ export default function Navbar() {
             whileHover={{ scale: 1.1 }}
             className="p-2 rounded-full bg-gray-100 hover:bg-gray-200 transition cursor-pointer"
           >
-            <ShoppingCart size={20} />
+              <Link href="/cart">
+                  <ShoppingCart size={20} />
+              </Link>
           </motion.div>
 
           {/* Profile */}
