@@ -5,6 +5,11 @@ export interface Product {
     price: number
 }
 
+export interface CartProduct extends Product {
+    quantity: number;
+}
+
+
 export const products: Product[] = [
     {
         name: "Classic White T-Shirt",
