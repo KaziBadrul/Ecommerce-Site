@@ -14,7 +14,7 @@ const ProductCarousel = () => {
     return (
         <div className="w-full max-w-7xl mx-auto py-10 relative">
             <h2 className="font-bold text-3xl mb-6">
-                <p>New Drop</p>
+                <p>New Drops</p>
             </h2>
 
             <Carousel
@@ -37,8 +37,10 @@ const ProductCarousel = () => {
                 </CarouselContent>
 
 
-                <CarouselPrevious className="absolute -left-6 top-1/2 -translate-y-1/2 bg-white shadow-md hover:shadow-lg" />
-                <CarouselNext className="absolute -right-6 top-1/2 -translate-y-1/2 bg-white shadow-md hover:shadow-lg" />
+                <CarouselPrevious className="absolute -left-6 top-1/2 -translate-y-1/2 bg-[#115acf]  text-white border-none cursor-pointer" />
+                <CarouselNext className="absolute -right-6 top-1/2 -translate-y-1/2 bg-[#115acf]
+                text-white border-none cursor-pointer
+                " />
             </Carousel>
         </div>
     )

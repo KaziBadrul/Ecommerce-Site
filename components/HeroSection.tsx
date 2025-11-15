@@ -87,7 +87,7 @@ export default function HeroSection() {
           <motion.button
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.97 }}
-            className="mt-6 px-7 py-3 bg-[#115acf] text-white rounded-full text-lg font-semibold transition-all duration-300 hover:bg-[#0a3c8c]"
+            className="mt-6 px-7 py-3 bg-[#115acf] text-white rounded-full text-lg font-semibold transition-all duration-300 hover:bg-[#0a3c8c] cursor-pointer"
           >
               <p>Add to Cart</p>
           </motion.button>

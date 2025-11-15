@@ -43,10 +43,10 @@ export default function Navbar() {
               {searchOpen ? (
                 <X size={20} />
               ) : (
-                <div className="w-fit h-fit bg-gray-100 hover:bg-gray-300 rounded-full p-1 flex flex-row items-center justify-center transition cursor-pointer">
+                <div className="w-[38px] h-[38px] bg-gray-100 hover:bg-gray-300 rounded-full flex flex-row items-center justify-center transition-all duration-300 cursor-pointer">
                     <Search
                         size={20}
-                        className="transition z-20"
+                        className="z-20 transition-all duration-300"
                     />
                 </div>
               )}

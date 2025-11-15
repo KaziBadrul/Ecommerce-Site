@@ -9,7 +9,7 @@ const App = () => {
       {/* Added a hero section it looked empty without it 
         Edit its style */}
       <HeroSection />
-      <section className="bg-white h-[600x] rounded-2xl flex flex-col items-center justify-between mx-6">
+      <section className="bg-white h-[600x] rounded-2xl flex flex-col items-center justify-between mx-6 mt-8 border-[#3c85fa] border-6">
         <div className="flex-4 flex flex-col items-center justify-center w-full">
           <ProductCarousel />
         </div>
