@@ -20,6 +20,8 @@ export default function Navbar() {
   const [searchOpen, setSearchOpen] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
+  // New Navbar
+
   return (
     <header className="bg-white/80 backdrop-blur-md w-full h-20 flex items-center px-6 shadow-sm border-b sticky top-0 z-50">
       <nav className="flex items-center justify-between w-full max-w-7xl mx-auto">
