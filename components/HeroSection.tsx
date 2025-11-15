@@ -48,7 +48,7 @@ export default function HeroSection() {
   const jacket = jackets[currentIndex];
 
   return (
-    <section className="relative w-full h-[80vh] rounded-2xl mt-6 overflow-hidden text-black flex items-center px-12">
+    <section className="relative w-full h-[80vh] rounded-2xl  text-black flex items-center px-12">
       <motion.div
         className="absolute inset-0"
         animate={{ opacity: [0.3, 0.45, 0.3] }}
@@ -67,11 +67,11 @@ export default function HeroSection() {
           transition={{ duration: 0.8, ease: "easeInOut" }}
         >
           {/* <h1 className="text-6xl">[BRAND NAME]</h1> */}
-          <h1 className="text-5xl md:text-6xl font-extrabold leading-tight">
+          <h1 className="font-poppins text-5xl md:text-6xl font-extrabold leading-tight">
             {jacket.title}
           </h1>
 
-          <h2 className="text-3xl mt-4 font-bold text-orange-500">
+          <h2 className="text-3xl mt-4 font-bold text-[#3c85fa]">
             {jacket.subtitle}
           </h2>
 
@@ -87,9 +87,9 @@ export default function HeroSection() {
           <motion.button
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.97 }}
-            className="mt-6 px-7 py-3 bg-orange-400 text-white rounded-full text-lg font-semibold transition-all duration-300 hover:bg-orange-500"
+            className="mt-6 px-7 py-3 bg-[#115acf] text-white rounded-full text-lg font-semibold transition-all duration-300 hover:bg-[#0a3c8c]"
           >
-            Add to Cart
+              <p>Add to Cart</p>
           </motion.button>
         </motion.div>
       </AnimatePresence>
@@ -97,7 +97,7 @@ export default function HeroSection() {
       <AnimatePresence mode="wait">
         <motion.div
           key={currentIndex}
-          className="absolute right-40 bottom-0 top-0 flex items-center"
+          className="absolute right-10 bottom-0 top-0 flex items-center"
           initial={{ opacity: 0, x: 100 }}
           animate={{ opacity: 1, x: 0 }}
           exit={{ opacity: 0, x: 100 }}

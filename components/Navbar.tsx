@@ -43,10 +43,12 @@ export default function Navbar() {
               {searchOpen ? (
                 <X size={20} />
               ) : (
-                <Search
-                  size={20}
-                  className="rounded-full bg-gray-100 hover:bg-gray-200 transition z-20"
-                />
+                <div className="w-fit h-fit bg-gray-100 hover:bg-gray-300 rounded-full p-1 flex flex-row items-center justify-center transition cursor-pointer">
+                    <Search
+                        size={20}
+                        className="transition z-20"
+                    />
+                </div>
               )}
             </motion.button>
 
@@ -72,7 +74,7 @@ export default function Navbar() {
           {/* Cart icon */}
           <motion.div
             whileHover={{ scale: 1.1 }}
-            className="p-2 rounded-full bg-gray-100 hover:bg-gray-200 transition cursor-pointer"
+            className="p-2 rounded-full bg-gray-100 hover:bg-gray-300 transition cursor-pointer"
           >
               <Link href="/cart">
                   <ShoppingCart size={20} />
@@ -82,7 +84,7 @@ export default function Navbar() {
           {/* Profile */}
           <motion.div
             whileHover={{ scale: 1.1 }}
-            className="p-2 rounded-full bg-gray-100 hover:bg-gray-200 transition cursor-pointer"
+            className="p-2 rounded-full bg-gray-100 hover:bg-gray-300 transition cursor-pointer"
           >
             <User size={20} />
           </motion.div>
@@ -118,14 +120,14 @@ export default function Navbar() {
                   console.error("Logout error:", err);
                 }
               }}
-              className="bg-red-500 hover:bg-red-600 text-white"
+              className="text-white cursor-pointer"
             >
-              Logout
+              <p>Logout</p>
             </Button>
           ) : (
             <Link href="/login">
-              <Button className="bg-orange-400 hover:bg-orange-500 text-white">
-                Login
+              <Button className=" text-white cursor-pointer font">
+                <p>Login</p>
               </Button>
             </Link>
           )}
