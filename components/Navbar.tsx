@@ -18,7 +18,6 @@ export default function Navbar() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   const isAdminRoute = usePathname().startsWith("/admin");
-  if (isAdminRoute) return null; // Hide navbar on admin routes
 
   return (
     <header className="bg-white/80 backdrop-blur-md w-full h-20 flex items-center px-6 shadow-sm border-b sticky top-0 z-50">
