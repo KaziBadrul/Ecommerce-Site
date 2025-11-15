@@ -23,22 +23,12 @@ export default function AdminViewProduct() {
   const fetchProducts = async () => {
     setLoading(true);
     try {
-      const { data: productsData, error } = await supabase
-        .from("products")
-        .select("*, product_images(*)");
-
-      if (error) throw error;
-
-      if (productsData) {
-        const formatted: Product[] = productsData.map((p: any) => ({
-          id: p.id,
-          name: p.name,
-          description: p.description,
-          price: p.price,
-          stock: p.stock,
-          image_url: p.product_images?.[0]?.image_url,
-        }));
+      const res = await fetch("/api/get-product");
+      const formatted: Product[] = await res.json();
+      if (res.ok) {
         setProducts(formatted);
+      } else {
+        throw new Error("Failed to fetch products!");
       }
     } catch (err: any) {
       console.error("Error fetching products:", err.message);

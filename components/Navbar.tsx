@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { useUser } from "@/hooks/useUser";
+import { supabase } from "@/lib/supabaseClient";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { useRouter } from "next/navigation";
@@ -24,9 +25,7 @@ export default function Navbar() {
 
         <div className="flex flex-row items-center justify-between h-full w-fit">
           <div className="h-full mr-5 flex flex-row items-center">
-              <Link href="/cart">
-                  <Image src="/icons/cart.svg" alt="Cart" width={52} height={52} />
-              </Link>
+            <Image src="/icons/cart.svg" alt="Cart" width={52} height={52} />
           </div>
 
           <div className="h-full w-full flex flex-row items-center justify-between">
