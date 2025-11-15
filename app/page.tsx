@@ -9,12 +9,12 @@ const App = () => {
       {/* Added a hero section it looked empty without it 
         Edit its style */}
       <HeroSection />
-      <section className="bg-white h-[600x] rounded-2xl flex flex-col items-center justify-between mx-6 mt-8 border-[#3c85fa] border-6">
+      <section className="bg-[#b3cffc] h-[600x] rounded-2xl flex flex-col items-center justify-between mx-6 mt-8 border-double border-[#3c85fa] border-6">
         <div className="flex-4 flex flex-col items-center justify-center w-full">
           <ProductCarousel />
         </div>
       </section>
-      <section className="bg-white rounded-2xl grid grid-cols-2 gap-4 h-[600px] mt-5 p-4 mx-6">
+      <section className="bg-white rounded-2xl grid grid-cols-2 gap-4 h-[600px] mt-16 p-4 mx-6">
         <div className=" relative overflow-hidden rounded-sm">
           <Image
             src="/men-wear.jpg"
