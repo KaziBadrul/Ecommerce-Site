@@ -4,7 +4,7 @@ import Link from "next/link";
 import { useUser } from "@/hooks/useUser";
 import { logout } from "@/app/actions/auth";
 import { Button } from "@/components/ui/button";
-import { useRouter } from "next/navigation";
+import { useRouter, usePathname } from "next/navigation";
 import Image from "next/image";
 
 import { motion, AnimatePresence } from "framer-motion";
@@ -14,6 +14,8 @@ import { Search, ShoppingCart, User, X, Menu } from "lucide-react";
 export default function Navbar() {
   const { user, isAdmin } = useUser();
   const router = useRouter();
+
+  const isCurrentPathAdmin = usePathname().startsWith("/admin");
 
   const [searchOpen, setSearchOpen] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -85,13 +87,23 @@ export default function Navbar() {
           </motion.div>
 
           {/* Admin Button */}
-          {user && isAdmin && (
+          {user && isAdmin && !isCurrentPathAdmin && (
             <Button
               variant="outline"
               className="border-orange-400 text-orange-500 hover:bg-orange-50"
               onClick={() => router.push("/admin")}
             >
               Admin Panel
+            </Button>
+          )}
+
+          {user && isAdmin && isCurrentPathAdmin && (
+            <Button
+              variant="outline"
+              className="border-orange-400 text-orange-500 hover:bg-orange-50"
+              onClick={() => router.push("/")}
+            >
+              Shop Page
             </Button>
           )}
 
