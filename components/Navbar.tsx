@@ -100,7 +100,7 @@ export default function Navbar() {
             <Button
               variant="outline"
               className="border-orange-400 text-orange-500 hover:bg-orange-50"
-              onClick={() => router.push("/admin")}
+              onClick={() => router.push("/")}
             >
               Shop Page
             </Button>
