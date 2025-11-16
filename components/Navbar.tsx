@@ -126,7 +126,7 @@ export default function Navbar() {
             </Button>
           ) : (
             <Link href="/login">
-              <Button className=" text-white cursor-pointer font">
+              <Button className=" text-white cursor-pointer">
                 <p>Login</p>
               </Button>
             </Link>
@@ -164,7 +164,7 @@ export default function Navbar() {
             {/* Icons */}
             <div className="flex items-center gap-6 mt-4">
               <div className="p-2 rounded-full bg-gray-100">
-                <ShoppingCart size={20} />
+                  <Link href="/cart"><ShoppingCart size={20} /></Link>
               </div>
               <div className="p-2 rounded-full bg-gray-100">
                 <User size={20} />
@@ -175,13 +175,13 @@ export default function Navbar() {
             {user && isAdmin && (
               <Button
                 variant="outline"
-                className="w-full mt-4 border-orange-400 text-orange-500 hover:bg-orange-50"
+                className="border-[#115acf] cursor-pointer text-blue-400 hover:bg-blue-50"
                 onClick={() => {
                   router.push("/admin");
                   setMobileMenuOpen(false);
                 }}
               >
-                Admin Panel
+                  <p>Admin Panel</p>
               </Button>
             )}
 
@@ -196,14 +196,14 @@ export default function Navbar() {
                     console.error("Logout error:", err);
                   }
                 }}
-                className="w-full mt-3 bg-red-500 hover:bg-red-600 text-white"
+                className="text-white cursor-pointer"
               >
-                Logout
+                <p>Logout</p>
               </Button>
             ) : (
               <Link href="/login" onClick={() => setMobileMenuOpen(false)}>
-                <Button className="w-full mt-3 bg-orange-400 hover:bg-orange-500 text-white">
-                  Login
+                <Button className="w-full mt-3 text-white cursor-pointer">
+                  <p>Login</p>
                 </Button>
               </Link>
             )}
