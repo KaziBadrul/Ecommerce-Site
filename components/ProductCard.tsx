@@ -3,16 +3,20 @@ import { addToCart } from "@/utils/addToCart";
 import Link from "next/link";
 
 interface Props {
-    name: string;
-    image: string;
-    slug: string;
-    price: number;
+  id: string;
+  name: string;
+  description: string;
+  price: number;
+  stock: number;
+  image_url?: string;
 }
 
-const ProductCard = ({ name, image, slug, price }: Props) => {
-    return (
-                <div
-                    className="
+const ProductCard = ({ name, image_url, id, price }: Props) => {
+  const slug = id;
+
+  return (
+    <div
+      className="
                         w-[20rem] h-[28rem]
                         bg-white rounded-3xl
                         shadow-md hover:shadow-xl
@@ -23,32 +27,31 @@ const ProductCard = ({ name, image, slug, price }: Props) => {
                         hover:-translate-y-2 hover:scale-[1.02]
                         cursor-pointer
                     "
-                >
-                {/* Image */}
-                <div className="w-full h-[260px] rounded-2xl overflow-hidden relative">
-                    <Image
-                        src={image}
-                        alt={name}
-                        loading="lazy"
-                        fill
-                        className="object-cover transition-transform duration-500 hover:scale-105"
-                    />
-                 </div>
+    >
+      {/* Image */}
+      <div className="w-full h-[260px] rounded-2xl overflow-hidden relative">
+        <Image
+          src={image_url ? image_url : "/placeholder-image.png"}
+          alt={name}
+          loading="lazy"
+          fill
+          className="object-cover transition-transform duration-500 hover:scale-105"
+        />
+      </div>
 
-                {/* Content */}
-                <div className="w-full mt-4 flex flex-col flex-grow">
-                    <p className="font-semibold text-lg text-gray-800 line-clamp-2">
-                        {name}
-                    </p>
+      {/* Content */}
+      <div className="w-full mt-4 flex flex-col flex-grow">
+        <p className="font-semibold text-lg text-gray-800 line-clamp-2">
+          {name}
+        </p>
 
-                    <p className="font-bold text-2xl mt-3 text-gray-900 tracking-wide">
-                        {price.toFixed(2)} BDT
-                    </p>
+        <p className="font-bold text-2xl mt-3 text-gray-900 tracking-wide">
+          {price.toFixed(2)} BDT
+        </p>
 
-
-                    <Link href={`/product-page/${slug}`}>
-                        <button
-                        className="
+        <Link href={`/product-page/${slug}`}>
+          <button
+            className="
                             mt-2 w-[100px] py-3
                            bg-[#115acf]
                             rounded-4xl
@@ -57,21 +60,22 @@ const ProductCard = ({ name, image, slug, price }: Props) => {
                             shrink-0
                             cursor-pointer
                         "
-                    >
-                        <div className="flex flex-row items-center justify-center">
-                            <p className="text-white font-bold">View</p>
-                            <Image src="/icons/right-arrow.svg" alt="arrow" width={24} height={24} className="inline-block ml-2" />
-                        </div>
-                    </button>
-                    </Link>
-                </div>
+          >
+            <div className="flex flex-row items-center justify-center">
+              <p className="text-white font-bold">View</p>
+              <Image
+                src="/icons/right-arrow.svg"
+                alt="arrow"
+                width={24}
+                height={24}
+                className="inline-block ml-2"
+              />
             </div>
-
-    );
+          </button>
+        </Link>
+      </div>
+    </div>
+  );
 };
 
 export default ProductCard;
-
-
-
-
