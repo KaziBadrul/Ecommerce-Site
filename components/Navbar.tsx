@@ -44,10 +44,10 @@ export default function Navbar() {
                 <X size={20} />
               ) : (
                 <div className="w-[38px] h-[38px] bg-gray-100 hover:bg-gray-300 rounded-full flex flex-row items-center justify-center transition-all duration-300 cursor-pointer">
-                    <Search
-                        size={20}
-                        className="z-20 transition-all duration-300"
-                    />
+                  <Search
+                    size={20}
+                    className="z-20 transition-all duration-300"
+                  />
                 </div>
               )}
             </motion.button>
@@ -76,9 +76,9 @@ export default function Navbar() {
             whileHover={{ scale: 1.1 }}
             className="p-2 rounded-full bg-gray-100 hover:bg-gray-300 transition cursor-pointer"
           >
-              <Link href="/cart">
-                  <ShoppingCart size={20} />
-              </Link>
+            <Link href="/cart">
+              <ShoppingCart size={20} />
+            </Link>
           </motion.div>
 
           {/* Profile */}
@@ -96,7 +96,7 @@ export default function Navbar() {
               className="border-[#115acf] cursor-pointer text-blue-400 hover:bg-blue-50"
               onClick={() => router.push("/admin")}
             >
-                <p>Admin Panel</p>
+              <p>Admin Panel</p>
             </Button>
           )}
 
@@ -106,7 +106,7 @@ export default function Navbar() {
               className="border-[#115acf] cursor-pointer text-blue-400 hover:bg-blue-50"
               onClick={() => router.push("/")}
             >
-                <p>Shop Page</p>
+              <p>Shop Page</p>
             </Button>
           )}
 

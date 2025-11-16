@@ -3,7 +3,7 @@
 import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 import { useState, useEffect } from "react";
-import {addToCart} from "@/utils/addToCart";
+import { addToCart } from "@/utils/addToCart";
 
 const jackets = [
   {
@@ -49,7 +49,7 @@ export default function HeroSection() {
   const jacket = jackets[currentIndex];
 
   return (
-    <section className="relative w-full h-[80vh] rounded-2xl  text-black flex items-center px-12">
+    <section className="relative w-full  h-[80vh] rounded-2xl  text-black flex items-center px-12">
       <motion.div
         className="absolute inset-0"
         animate={{ opacity: [0.3, 0.45, 0.3] }}
@@ -61,14 +61,14 @@ export default function HeroSection() {
       <AnimatePresence mode="wait">
         <motion.div
           key={currentIndex}
-          className="relative z-10 max-w-lg space-y-4"
+          className="relative z-10 max-w-lg space-y-4 bg-white/70 p-8 rounded-2xl shadow-2xl lg:bg-transparent lg:p-0 lg:shadow-none"
           initial={{ opacity: 0, y: 50 }}
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: -50 }}
           transition={{ duration: 0.8, ease: "easeInOut" }}
         >
           {/* <h1 className="text-6xl">[BRAND NAME]</h1> */}
-          <h1 className="font-poppins text-5xl md:text-6xl font-extrabold leading-tight">
+          <h1 className="font-poppins text-4xl sm:text-5xl md:text-6xl font-extrabold leading-tight">
             {jacket.title}
           </h1>
 
@@ -88,10 +88,17 @@ export default function HeroSection() {
           <motion.button
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.97 }}
-            onClick={() => addToCart({name:jacket.subtitle,price: jacket.price,image:jacket.image, slug:jacket.title})}
+            onClick={() =>
+              addToCart({
+                name: jacket.subtitle,
+                price: jacket.price,
+                image: jacket.image,
+                slug: jacket.title,
+              })
+            }
             className="mt-6 px-7 py-3 bg-[#115acf] text-white rounded-full text-lg font-semibold transition-all duration-300 hover:bg-[#0a3c8c] cursor-pointer"
           >
-              <p>Add to Cart</p>
+            <p>Add to Cart</p>
           </motion.button>
         </motion.div>
       </AnimatePresence>

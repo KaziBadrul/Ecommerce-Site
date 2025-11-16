@@ -2,10 +2,9 @@ import HeroSection from "@/components/HeroSection";
 import ProductCarousel from "@/components/ProductCarousel";
 import Image from "next/image";
 
-
 const App = () => {
   return (
-    <main className="py-2 bg-gray-100">
+    <main className="py-2 bg-gray-100 overflow-x-clip  mx-auto  mb-16">
       {/* Added a hero section it looked empty without it 
         Edit its style */}
       <HeroSection />
@@ -22,7 +21,7 @@ const App = () => {
             fill
             className="object-cover transform transition-transform duration-300 ease-in-out hover:scale-105"
           />
-          <p className="absolute top-1/3 right-1/7 text-3xl font-bold text-white">
+          <p className="absolute top-1/3 right-1/7 text-xl sm:text-3xl font-bold text-white">
             M E N
           </p>
         </div>
@@ -33,7 +32,7 @@ const App = () => {
             fill
             className="object-cover transform transition-transform duration-300 ease-in-out hover:scale-105"
           />
-          <p className="absolute top-1/3 right-1/7 text-3xl font-bold text-white">
+          <p className="absolute top-1/3 right-1/7 text-xl sm:text-3xl font-bold text-white">
             W O M E N
           </p>
         </div>
@@ -44,7 +43,7 @@ const App = () => {
             fill
             className="object-cover transform transition-transform duration-300 ease-in-out hover:scale-105"
           />
-          <p className="absolute top-1/3 right-1/7 text-3xl font-bold text-white">
+          <p className="absolute top-1/3 right-1/7 text-xl sm:text-3xl font-bold text-white">
             H O O D I E S
           </p>
         </div>
@@ -55,7 +54,7 @@ const App = () => {
             fill
             className="object-cover transform transition-transform duration-300 ease-in-out hover:scale-105"
           />
-          <p className="absolute top-1/3 right-1/7 text-3xl font-bold text-white">
+          <p className="absolute top-1/3 right-1/7 text-xl sm:text-3xl font-bold text-white">
             S H O E S
           </p>
         </div>

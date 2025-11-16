@@ -56,7 +56,7 @@ const ProductCarousel = () => {
   return (
     <div className="w-full max-w-7xl mx-auto py-10 relative">
       <h2 className="font-bold text-3xl mb-6">
-        <p className="text-blue-900">New Drops</p>
+        <p className="text-blue-900 px-2 sm:px-0">New Drops</p>
       </h2>
 
       <Carousel
@@ -64,12 +64,15 @@ const ProductCarousel = () => {
         opts={{
           loop: true,
           containScroll: "trimSnaps",
-          align: "start",
+          align: "center",
         }}
       >
-        <CarouselContent className="-ml-[600px] py-10">
+        <CarouselContent className="md:-ml-[600px] py-10">
           {products.map((product) => (
-            <CarouselItem key={product.name} className="basis-1/5">
+            <CarouselItem
+              key={product.name}
+              className="md:basis-1/5 px-4 shrink-0 "
+            >
               <ProductCard {...product} />
             </CarouselItem>
           ))}
