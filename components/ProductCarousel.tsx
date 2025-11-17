@@ -79,7 +79,7 @@ const ProductCarousel = () => {
           {products.map((product) => (
             <CarouselItem
               key={product.name}
-              className="basis-full flex justify-center md:basis-1/5 px-4 shrink-0"
+              className="basis-full flex justify-center md:basis-1/5 px-4 shrink-0 ml-2"
             >
               <ProductCard {...product} />
             </CarouselItem>
