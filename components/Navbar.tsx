@@ -30,6 +30,8 @@ export default function Navbar() {
         {/* DESKTOP MENU */}
         <div className="hidden md:flex items-center gap-6">
           {/* Search Section */}
+
+          {/* BACKUP  */}
           <div className="relative flex items-center">
             {/* Search Toggle Button */}
             <motion.button
@@ -164,7 +166,9 @@ export default function Navbar() {
             {/* Icons */}
             <div className="flex items-center gap-6 mt-4">
               <div className="p-2 rounded-full bg-gray-100">
-                  <Link href="/cart"><ShoppingCart size={20} /></Link>
+                <Link href="/cart">
+                  <ShoppingCart size={20} />
+                </Link>
               </div>
               <div className="p-2 rounded-full bg-gray-100">
                 <User size={20} />
@@ -181,7 +185,7 @@ export default function Navbar() {
                   setMobileMenuOpen(false);
                 }}
               >
-                  <p>Admin Panel</p>
+                <p>Admin Panel</p>
               </Button>
             )}
 

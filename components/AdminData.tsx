@@ -32,7 +32,7 @@ export default function AdminData() {
 
   const fetchOrders = async () => {
     try {
-      const res = await fetch("/api/get-orders"); // your API route
+      const res = await fetch("/api/get-sales"); // your API route
       const data = await res.json();
       if (res.ok) {
         setOrders(data);

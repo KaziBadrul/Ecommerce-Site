@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 interface Props {
   id: string;
@@ -14,10 +15,18 @@ interface Props {
 
 const ProductCard = ({ name, image_url, id, price }: Props) => {
   const slug = id;
+  const router = useRouter();
 
   return (
-    <Link
-      href={`/product-page/${slug}`}
+    // <Link
+    //   href={`/product-page/${slug}`}
+    //   className="w-[20rem] h-[28rem] bg-white rounded-3xl shadow-md hover:shadow-xl border border-gray-200 flex flex-col p-5 transition-all duration-300 ease-in-out hover:-translate-y-2 hover:scale-[1.02] cursor-pointer"
+    // >
+    <div
+      onClick={(e) => {
+        e.stopPropagation(); // prevent parent click
+        router.push(`/product-page/${slug}`);
+      }}
       className="w-[20rem] h-[28rem] bg-white rounded-3xl shadow-md hover:shadow-xl border border-gray-200 flex flex-col p-5 transition-all duration-300 ease-in-out hover:-translate-y-2 hover:scale-[1.02] cursor-pointer"
     >
       {/* Image */}
@@ -54,7 +63,8 @@ const ProductCard = ({ name, image_url, id, price }: Props) => {
           </button>
         </Link>
       </div>
-    </Link>
+    </div>
+    // </Link>
   );
 };
 
