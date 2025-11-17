@@ -79,8 +79,10 @@ export default function HeroSection() {
           <p className="text-gray-700 leading-relaxed">{jacket.description}</p>
 
           <div className="mt-3 text-xl flex items-center gap-4">
-            <span className="text-green-500 font-bold">{jacket.price} BDT</span>
-            <span className="line-through text-gray-400">
+            <span className="text-white text-sm  md:text-2xl lg:text-3xl bg-green-500 lg:bg-transparent px-2 py-1 rounded-full lg:text-green-500 font-bold">
+              {jacket.price} BDT
+            </span>
+            <span className="line-through text-gray-400 text-sm md:text-2xl">
               {jacket.oldPrice} BDT
             </span>
           </div>
@@ -88,7 +90,6 @@ export default function HeroSection() {
           <motion.button
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.97 }}
-
             className="mt-6 px-7 py-3 bg-[#115acf] text-white rounded-full text-lg font-semibold transition-all duration-300 hover:bg-[#0a3c8c] cursor-pointer"
           >
             <p>Add to Cart</p>

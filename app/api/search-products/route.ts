@@ -6,20 +6,47 @@ const supabaseAdmin = createClient(
   process.env.SUPABASE_SERVICE_ROLE_KEY!
 );
 
+interface Product {
+  id: number;
+  name: string;
+  description: string;
+  price: number;
+  stock: number;
+  image_url?: string;
+}
+
 export async function GET(req: Request) {
   const { searchParams } = new URL(req.url);
   const query = searchParams.get("q")?.trim() || "";
 
   if (!query) return NextResponse.json([]);
 
-  const { data, error } = await supabaseAdmin
-    .from("products")
-    .select("*")
-    .ilike("name", `%${query}%`)
-    .limit(20);
+  // NEW VERSION WITH IMAGE
+  try {
+    const { data: productsData, error } = await supabaseAdmin
+      .from("products")
+      .select("*, product_images(*)")
+      .ilike("name", `%${query}%`)
+      .limit(20);
 
-  if (error)
-    return NextResponse.json({ error: error.message }, { status: 500 });
+    if (error) throw error;
 
-  return NextResponse.json(data);
+    if (!productsData) {
+      return Response.json([], { status: 200 });
+    }
+
+    const formatted: Product[] = productsData.map((p: any) => ({
+      id: p.id,
+      name: p.name,
+      description: p.description,
+      price: p.price,
+      stock: p.stock,
+      image_url: p.product_images?.[0]?.image_url ?? null,
+    }));
+
+    return NextResponse.json(formatted, { status: 200 });
+  } catch (err: any) {
+    console.error("Error fetching products:", err.message);
+    return NextResponse.json({ error: err.message }, { status: 500 });
+  }
 }

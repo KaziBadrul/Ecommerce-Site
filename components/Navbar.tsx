@@ -20,6 +20,16 @@ export default function Navbar() {
   const [results, setResults] = useState([]);
   const [loading, setLoading] = useState(false);
 
+  useEffect(() => {
+    function handleClickOutside(e) {
+      if (!e.target.closest(".mobile-search-area")) {
+        setQuery("");
+      }
+    }
+    document.addEventListener("click", handleClickOutside);
+    return () => document.removeEventListener("click", handleClickOutside);
+  }, []);
+
   // Debounced search
   useEffect(() => {
     if (!query.trim()) {
@@ -34,6 +44,7 @@ export default function Navbar() {
         const res = await fetch(`/api/search-products?q=${query}`);
         const data = await res.json();
         setResults(data);
+        console.log("Search results:", data);
       } catch (error) {
         console.error("Search error:", error);
       }
@@ -101,7 +112,7 @@ export default function Navbar() {
 
             {/* RESULTS DROPDOWN */}
             {searchOpen && query.length > 0 && (
-              <div className="absolute right-0 mt-14 w-72 bg-white shadow-lg rounded-xl border z-50 max-h-72 overflow-y-auto">
+              <div className="absolute right-0 top-10 w-72 bg-white shadow-lg rounded-xl border z-50 max-h-72 overflow-y-auto">
                 {loading && (
                   <p className="p-3 text-gray-500 text-sm">Searching...</p>
                 )}
@@ -113,17 +124,24 @@ export default function Navbar() {
                 {results.map((item) => (
                   <Link
                     key={item.id}
-                    href={`/product-page/${item.slug}`}
+                    href={`/product-page/${item.id}`}
                     onClick={() => {
                       setSearchOpen(false);
                       setQuery("");
                     }}
                     className="flex gap-3 items-center p-3 hover:bg-gray-100 cursor-pointer"
                   >
-                    <img
-                      src={item.image}
+                    <Image
+                      src={
+                        item.image_url && item.image_url.trim() !== ""
+                          ? item.image_url
+                          : "/placeholder-image.png"
+                      }
+                      width={48}
+                      height={48}
                       className="w-12 h-12 rounded-md object-cover"
-                      alt={item.name}
+                      alt={item.name || "Product"}
+                      unoptimized
                     />
                     <div>
                       <p className="font-medium">{item.name}</p>
@@ -217,12 +235,66 @@ export default function Navbar() {
             className="md:hidden bg-white px-6 pb-4 shadow-md border-b top-20 absolute right-0 z-40"
           >
             {/* Search Bar */}
-            <div className="mt-4 flex items-center gap-3 bg-gray-100 px-3 py-2 rounded-lg">
-              <Search size={18} />
-              <input
-                placeholder="Search..."
-                className="w-full bg-transparent outline-none"
-              />
+            {/* MOBILE SEARCH BAR WITH RESULTS */}
+            <div className="mt-4 relative w-full mobile-search-area">
+              <div className="mt-4 relative w-full">
+                <div className="flex items-center gap-3 bg-gray-100 px-3 py-2 rounded-lg">
+                  <Search size={18} />
+                  <input
+                    value={query}
+                    onChange={(e) => setQuery(e.target.value)}
+                    placeholder="Search..."
+                    className="w-full bg-transparent outline-none"
+                  />
+                </div>
+
+                {/* RESULTS DROPDOWN */}
+                {query.length > 0 && (
+                  <div className="absolute left-0 mt-2 w-full bg-white shadow-lg rounded-xl border z-50 max-h-72 overflow-y-auto">
+                    {loading && (
+                      <p className="p-3 text-gray-500 text-sm">Searching...</p>
+                    )}
+
+                    {!loading && results.length === 0 && (
+                      <p className="p-3 text-gray-500 text-sm">
+                        No results found
+                      </p>
+                    )}
+
+                    {results.map((item) => (
+                      <Link
+                        key={item.id}
+                        href={`/product-page/${item.id}`}
+                        onClick={() => {
+                          setQuery("");
+                          setMobileMenuOpen(false);
+                        }}
+                        className="flex gap-3 items-center p-3 hover:bg-gray-100 cursor-pointer"
+                      >
+                        <Image
+                          src={
+                            item.image_url && item.image_url.trim() !== ""
+                              ? item.image_url
+                              : "/placeholder-image.png"
+                          }
+                          width={48}
+                          height={48}
+                          className="w-12 h-12 rounded-md object-cover"
+                          alt={item.name || "Product"}
+                          unoptimized
+                        />
+
+                        <div>
+                          <p className="font-medium">{item.name}</p>
+                          <p className="text-sm text-gray-600">
+                            Tk. {item.price}
+                          </p>
+                        </div>
+                      </Link>
+                    ))}
+                  </div>
+                )}
+              </div>
             </div>
 
             {/* Icons */}
