@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono, Roboto,Poppins} from "next/font/google";
+import { Geist, Roboto, Poppins } from "next/font/google";
 import "./globals.css";
 import { Toaster } from "sonner";
 import ClientLayout from "@/components/ClientLayout";
@@ -10,18 +10,13 @@ const geistSans = Geist({
 });
 
 const poppins = Poppins({
-    variable: "--font-poppins",
-    subsets: ["latin"],
-    weight: ["400", "700"],
+  variable: "--font-poppins",
+  subsets: ["latin"],
+  weight: ["400", "700"],
 });
 
 const roboto = Roboto({
   variable: "--font-roboto",
-  subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
   subsets: ["latin"],
 });
 
@@ -37,7 +32,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${geistSans.variable} ${roboto.variable} ${poppins.variable} antialiased`}>
+      <body
+        className={`${geistSans.variable} ${roboto.variable} ${poppins.variable} antialiased`}
+      >
         <ClientLayout>{children}</ClientLayout>
 
         <Toaster richColors />

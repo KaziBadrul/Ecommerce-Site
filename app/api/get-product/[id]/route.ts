@@ -8,10 +8,10 @@ const supabaseAdmin = createClient(
 
 export async function GET(
   req: Request,
-  { params }: { params: { id: string } | Promise<{id: string}> }
+  { params }: { params: { id: string } | Promise<{ id: string }> }
 ) {
   try {
-    const {id: productId} = await params;
+    const { id: productId } = await params;
 
     const { data, error } = await supabaseAdmin
       .from("products")
@@ -39,8 +39,16 @@ export async function GET(
     };
 
     return NextResponse.json(formatted, { status: 200 });
-  } catch (err: any) {
-    console.error("Error fetching product:", err.message);
-    return NextResponse.json({ error: err.message }, { status: 500 });
+  } catch (err: unknown) {
+    let message = "Unknown error";
+
+    if (err instanceof Error) {
+      message = err.message;
+    } else if (typeof err === "string") {
+      message = err;
+    }
+
+    console.error("Error fetching product:", message);
+    return NextResponse.json({ error: message }, { status: 400 });
   }
 }

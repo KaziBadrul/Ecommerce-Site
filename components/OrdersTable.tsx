@@ -2,8 +2,25 @@
 import { useState } from "react";
 import { ChevronDown, ChevronRight } from "lucide-react";
 import Image from "next/image";
+interface OrderItem {
+  id: number;
+  product?: {
+    name: string;
+    image_url?: string | null;
+  };
+  size_id: string;
+  quantity: number;
+  price_at_purchase: number;
+}
 
-export default function OrdersTable({ orders }: { orders: any[] }) {
+interface Order {
+  id: number;
+  billing_name: string;
+  total_amount: number;
+  created_at: string;
+  items: OrderItem[];
+}
+export default function OrdersTable({ orders }: { orders: Order[] }) {
   const [expanded, setExpanded] = useState<number | null>(null);
 
   const toggleRow = (id: number) => {
@@ -59,7 +76,7 @@ export default function OrdersTable({ orders }: { orders: any[] }) {
                       <h3 className="font-bold text-lg">Order Items</h3>
 
                       <div className="space-y-3">
-                        {order.items.map((item: any) => (
+                        {order.items.map((item) => (
                           <div
                             key={item.id}
                             className="flex items-center gap-4 p-3 border rounded-lg bg-white shadow-sm"
@@ -70,7 +87,7 @@ export default function OrdersTable({ orders }: { orders: any[] }) {
                                 src={
                                   item.product?.image_url || "/placeholder.png"
                                 }
-                                alt={item.product?.name}
+                                alt={item.product?.name || "Product Image"}
                                 fill
                                 className="object-cover rounded-md"
                               />

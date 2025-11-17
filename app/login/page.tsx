@@ -16,33 +16,42 @@ export default function LoginPage() {
   const [loading, setLoading] = useState(false);
   const router = useRouter();
 
-  const handleLogin = async (e: React.FormEvent) => {
-    e.preventDefault();
+  /*************  ✨ Windsurf Command ⭐  *************/
+  /**
+   * Handles login form submission. Prevents default form submission,
+   * calls supabase's signInWithPassword method and handles the response.
+   * If the response is successful, logs the user in and redirects them to
+   * the home page. If the response is an error, shows an error message
+   * and resets the form state.
+   */
+  /*******  d7d25949-e772-44a3-8789-d40be4eb0d28  *******/ const handleLogin =
+    async (e: React.FormEvent) => {
+      e.preventDefault();
 
-    setLoading(true);
+      setLoading(true);
 
-    const { data, error } = await supabase.auth.signInWithPassword({
-      email,
-      password,
-    });
+      const { data, error } = await supabase.auth.signInWithPassword({
+        email,
+        password,
+      });
 
-    if (error) {
-      toast.error(error.message);
+      if (error) {
+        toast.error(error.message);
+        setLoading(false);
+        return;
+      }
+
+      if (data.user) {
+        toast.success("Logged in successfully!");
+        setEmail("");
+        setPassword("");
+
+        // Redirect user
+        router.push("/");
+      }
+
       setLoading(false);
-      return;
-    }
-
-    if (data.user) {
-      toast.success("Logged in successfully!");
-      setEmail("");
-      setPassword("");
-
-      // Redirect user
-      router.push("/");
-    }
-
-    setLoading(false);
-  };
+    };
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-orange-400">
