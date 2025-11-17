@@ -8,7 +8,7 @@ import { useRouter, usePathname } from "next/navigation";
 import Image from "next/image";
 
 import { motion, AnimatePresence } from "framer-motion";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Search, ShoppingCart, User, X, Menu } from "lucide-react";
 
 export default function Navbar() {
@@ -16,6 +16,33 @@ export default function Navbar() {
   const router = useRouter();
   const [searchOpen, setSearchOpen] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [query, setQuery] = useState("");
+  const [results, setResults] = useState([]);
+  const [loading, setLoading] = useState(false);
+
+  // Debounced search
+  useEffect(() => {
+    if (!query.trim()) {
+      setResults([]);
+      return;
+    }
+
+    const delay = setTimeout(async () => {
+      setLoading(true);
+
+      try {
+        const res = await fetch(`/api/search-products?q=${query}`);
+        const data = await res.json();
+        setResults(data);
+      } catch (error) {
+        console.error("Search error:", error);
+      }
+
+      setLoading(false);
+    }, 300); // 300ms debounce
+
+    return () => clearTimeout(delay);
+  }, [query]);
 
   const isAdminRoute = usePathname().startsWith("/admin");
 
@@ -30,47 +57,82 @@ export default function Navbar() {
         {/* DESKTOP MENU */}
         <div className="hidden md:flex items-center gap-6">
           {/* Search Section */}
-
-          {/* BACKUP  */}
+          {/* SEARCH SECTION */}
           <div className="relative flex items-center">
-            {/* Search Toggle Button */}
+            {/* Toggle button */}
             <motion.button
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.95 }}
-              onClick={() => setSearchOpen((prev) => !prev)}
+              onClick={() => {
+                setSearchOpen((prev) => !prev);
+                setQuery("");
+                setResults([]);
+              }}
               className="p-2 rounded-full z-20"
-              // bg-gray-100 hover:bg-gray-200 transition
-              // z-20 ensures it's always above the input
             >
               {searchOpen ? (
                 <X size={20} />
               ) : (
-                <div className="w-[38px] h-[38px] bg-gray-100 hover:bg-gray-300 rounded-full flex flex-row items-center justify-center transition-all duration-300 cursor-pointer">
-                  <Search
-                    size={20}
-                    className="z-20 transition-all duration-300"
-                  />
+                <div className="w-[38px] h-[38px] bg-gray-100 hover:bg-gray-300 rounded-full flex items-center justify-center transition">
+                  <Search size={20} />
                 </div>
               )}
             </motion.button>
 
-            {/* Expanding Input */}
+            {/* Search input animation */}
             <AnimatePresence>
               {searchOpen && (
                 <motion.div
                   initial={{ width: 0, opacity: 0 }}
-                  animate={{ width: 220, opacity: 1 }}
+                  animate={{ width: 260, opacity: 1 }}
                   exit={{ width: 0, opacity: 0 }}
                   transition={{ duration: 0.3 }}
                   className="absolute right-0 top-1/2 -translate-y-1/2"
                 >
                   <input
+                    value={query}
+                    onChange={(e) => setQuery(e.target.value)}
                     placeholder="Search jackets..."
                     className="w-full px-4 py-2 bg-white border rounded-lg shadow-md outline-none text-sm"
                   />
                 </motion.div>
               )}
             </AnimatePresence>
+
+            {/* RESULTS DROPDOWN */}
+            {searchOpen && query.length > 0 && (
+              <div className="absolute right-0 mt-14 w-72 bg-white shadow-lg rounded-xl border z-50 max-h-72 overflow-y-auto">
+                {loading && (
+                  <p className="p-3 text-gray-500 text-sm">Searching...</p>
+                )}
+
+                {!loading && results.length === 0 && (
+                  <p className="p-3 text-gray-500 text-sm">No results found</p>
+                )}
+
+                {results.map((item) => (
+                  <Link
+                    key={item.id}
+                    href={`/product-page/${item.slug}`}
+                    onClick={() => {
+                      setSearchOpen(false);
+                      setQuery("");
+                    }}
+                    className="flex gap-3 items-center p-3 hover:bg-gray-100 cursor-pointer"
+                  >
+                    <img
+                      src={item.image}
+                      className="w-12 h-12 rounded-md object-cover"
+                      alt={item.name}
+                    />
+                    <div>
+                      <p className="font-medium">{item.name}</p>
+                      <p className="text-sm text-gray-600">Tk. {item.price}</p>
+                    </div>
+                  </Link>
+                ))}
+              </div>
+            )}
           </div>
 
           {/* Cart icon */}
