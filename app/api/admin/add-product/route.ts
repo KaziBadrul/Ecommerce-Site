@@ -52,8 +52,16 @@ export async function POST(req: Request) {
     if (imageError) throw imageError;
 
     return NextResponse.json({ success: true, product });
-  } catch (err: any) {
-    console.error("Error adding product:", err.message);
-    return NextResponse.json({ error: err.message }, { status: 400 });
+  } catch (err: unknown) {
+    let message = "Unknown error";
+
+    if (err instanceof Error) {
+      message = err.message;
+    } else if (typeof err === "string") {
+      message = err;
+    }
+
+    console.error("Error adding product:", message);
+    return NextResponse.json({ error: message }, { status: 400 });
   }
 }

@@ -61,8 +61,16 @@ export async function GET() {
     });
 
     return NextResponse.json(ordersWithItems, { status: 200 });
-  } catch (err: any) {
-    console.error("API ERROR:", err.message);
-    return NextResponse.json({ error: err.message }, { status: 500 });
+  } catch (err: unknown) {
+    let message = "Unknown error";
+
+    if (err instanceof Error) {
+      message = err.message;
+    } else if (typeof err === "string") {
+      message = err;
+    }
+
+    console.error("Error getting orders:", message);
+    return NextResponse.json({ error: message }, { status: 400 });
   }
 }

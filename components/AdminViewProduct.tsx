@@ -30,9 +30,17 @@ export default function AdminViewProduct() {
       } else {
         throw new Error("Failed to fetch products!");
       }
-    } catch (err: any) {
-      console.error("Error fetching products:", err.message);
-      toast.error(err.message || "Failed to fetch products");
+    } catch (err: unknown) {
+      let message = "Unknown error";
+
+      if (err instanceof Error) {
+        message = err.message;
+      } else if (typeof err === "string") {
+        message = err;
+      }
+
+      console.error("Error fetching products:", message);
+      toast.error(message);
     } finally {
       setLoading(false);
     }
@@ -59,9 +67,17 @@ export default function AdminViewProduct() {
       toast.success("Product updated!");
       setEditingId(null);
       fetchProducts();
-    } catch (err: any) {
-      console.error("Error updating product:", err);
-      toast.error(err.message || "Update failed");
+    } catch (err: unknown) {
+      let message = "Unknown error";
+
+      if (err instanceof Error) {
+        message = err.message;
+      } else if (typeof err === "string") {
+        message = err;
+      }
+
+      console.error("Error updating product:", message);
+      toast.error(message);
     }
   };
 
@@ -94,9 +110,17 @@ export default function AdminViewProduct() {
 
       toast.success("Image uploaded!");
       fetchProducts();
-    } catch (err: any) {
-      console.error("Image upload error:", err);
-      toast.error(err.message || "Image upload failed");
+    } catch (err: unknown) {
+      let message = "Unknown error";
+
+      if (err instanceof Error) {
+        message = err.message;
+      } else if (typeof err === "string") {
+        message = err;
+      }
+
+      console.error("Image upload error:", message);
+      toast.error(message);
     } finally {
       setUploadingId(null);
     }

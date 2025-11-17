@@ -46,8 +46,16 @@ export default function AdminAddProduct() {
       setPrice("");
       setStock("");
       setImage(null);
-    } catch (err: any) {
-      toast.error(err.message || "Something went wrong");
+    } catch (err: unknown) {
+      let message = "Unknown error";
+
+      if (err instanceof Error) {
+        message = err.message;
+      } else if (typeof err === "string") {
+        message = err;
+      }
+
+      toast.error(message);
     } finally {
       setLoading(false);
       setTimeout(() => setSuccess(false), 2500);

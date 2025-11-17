@@ -14,64 +14,63 @@ const App = () => {
           <ProductCarousel />
         </div>
       </section>
-        <section className="bg-white rounded-2xl grid grid-cols-2 gap-3 min-h-[500px] mt-16 p-6 mx-6">
-            <Link href={`/product-list/Men`}>
-                <div className="relative h-64 overflow-hidden rounded-sm">
-                    <Image
-                        src="/men-wear.jpg"
-                        alt="Men's wear"
-                        fill
-                        className="object-cover transform transition-transform duration-300 ease-in-out hover:scale-105"
-                    />
-                    <p className="absolute top-1/3 left-4 text-xl sm:text-3xl font-bold text-white">
-                        M E N
-                    </p>
-                </div>
-            </Link>
+      <section className="bg-white rounded-2xl grid grid-cols-2 gap-3 min-h-[500px] mt-16 p-6 mx-6">
+        <Link href={`/product-list/Men`}>
+          <div className="relative h-64 overflow-hidden rounded-sm">
+            <Image
+              src="/men-wear.jpg"
+              alt="Men's wear"
+              fill
+              className="object-cover transform transition-transform duration-300 ease-in-out hover:scale-105"
+            />
+            <p className="absolute top-1/3 left-4 text-xl sm:text-3xl font-bold text-white">
+              M E N
+            </p>
+          </div>
+        </Link>
 
-            <Link href={`/product-list/Women`}>
-                <div className="relative h-64 overflow-hidden rounded-sm">
-                    <Image
-                        src="/women-wear.jpg"
-                        alt="Women’s wear"
-                        fill
-                        className="object-cover transform transition-transform duration-300 ease-in-out hover:scale-105"
-                    />
-                    <p className="absolute top-1/3 left-4 text-xl sm:text-3xl font-bold text-white">
-                        W O M E N
-                    </p>
-                </div>
-            </Link>
+        <Link href={`/product-list/Women`}>
+          <div className="relative h-64 overflow-hidden rounded-sm">
+            <Image
+              src="/women-wear.jpg"
+              alt="Women’s wear"
+              fill
+              className="object-cover transform transition-transform duration-300 ease-in-out hover:scale-105"
+            />
+            <p className="absolute top-1/3 left-4 text-xl sm:text-3xl font-bold text-white">
+              W O M E N
+            </p>
+          </div>
+        </Link>
 
-            <Link href={`/product-list/Hoodies`}>
-                <div className="relative h-64 overflow-hidden rounded-sm">
-                    <Image
-                        src="/hoodie.jpg"
-                        alt="Hoodies"
-                        fill
-                        className="object-cover transform transition-transform duration-300 ease-in-out hover:scale-105"
-                    />
-                    <p className="absolute top-1/3 left-4 text-xl sm:text-3xl font-bold text-white">
-                        H O O D I E S
-                    </p>
-                </div>
-            </Link>
+        <Link href={`/product-list/Hoodies`}>
+          <div className="relative h-64 overflow-hidden rounded-sm">
+            <Image
+              src="/hoodie.jpg"
+              alt="Hoodies"
+              fill
+              className="object-cover transform transition-transform duration-300 ease-in-out hover:scale-105"
+            />
+            <p className="absolute top-1/3 left-4 text-xl sm:text-3xl font-bold text-white">
+              H O O D I E S
+            </p>
+          </div>
+        </Link>
 
-            <Link href={`/product-list/Shoes`}>
-                <div className="relative h-64 overflow-hidden rounded-sm">
-                    <Image
-                        src="/shoes.jpg"
-                        alt="Shoes"
-                        fill
-                        className="object-cover transform transition-transform duration-300 ease-in-out hover:scale-105"
-                    />
-                    <p className="absolute top-1/3 left-4 text-xl sm:text-3xl font-bold text-white">
-                        S H O E S
-                    </p>
-                </div>
-            </Link>
-        </section>
-
+        <Link href={`/product-list/Shoes`}>
+          <div className="relative h-64 overflow-hidden rounded-sm">
+            <Image
+              src="/shoes.jpg"
+              alt="Shoes"
+              fill
+              className="object-cover transform transition-transform duration-300 ease-in-out hover:scale-105"
+            />
+            <p className="absolute top-1/3 left-4 text-xl sm:text-3xl font-bold text-white">
+              S H O E S
+            </p>
+          </div>
+        </Link>
+      </section>
     </main>
   );
 };

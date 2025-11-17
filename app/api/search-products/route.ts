@@ -12,7 +12,16 @@ interface Product {
   description: string;
   price: number;
   stock: number;
-  image_url?: string;
+  image_url?: string | null;
+}
+
+interface ProductWithImages {
+  id: number;
+  name: string;
+  description: string;
+  price: number;
+  stock: number;
+  product_images?: { image_url?: string }[];
 }
 
 export async function GET(req: Request) {
@@ -35,18 +44,28 @@ export async function GET(req: Request) {
       return Response.json([], { status: 200 });
     }
 
-    const formatted: Product[] = productsData.map((p: any) => ({
-      id: p.id,
-      name: p.name,
-      description: p.description,
-      price: p.price,
-      stock: p.stock,
-      image_url: p.product_images?.[0]?.image_url ?? null,
-    }));
+    const formatted: Product[] = (productsData as ProductWithImages[]).map(
+      (p) => ({
+        id: p.id,
+        name: p.name,
+        description: p.description,
+        price: p.price,
+        stock: p.stock,
+        image_url: p.product_images?.[0]?.image_url ?? null,
+      })
+    );
 
     return NextResponse.json(formatted, { status: 200 });
-  } catch (err: any) {
-    console.error("Error fetching products:", err.message);
-    return NextResponse.json({ error: err.message }, { status: 500 });
+  } catch (err: unknown) {
+    let message = "Unknown error";
+
+    if (err instanceof Error) {
+      message = err.message;
+    } else if (typeof err === "string") {
+      message = err;
+    }
+
+    console.error("Error fetching products:", message);
+    return NextResponse.json({ error: message }, { status: 400 });
   }
 }

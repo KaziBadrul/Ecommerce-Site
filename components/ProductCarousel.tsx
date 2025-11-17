@@ -37,9 +37,17 @@ const ProductCarousel = () => {
       } else {
         throw new Error("Failed to fetch products!");
       }
-    } catch (err: any) {
-      console.error("Error fetching products:", err.message);
-      toast.error(err.message || "Failed to fetch products");
+    } catch (err: unknown) {
+      let message = "Unknown error";
+
+      if (err instanceof Error) {
+        message = err.message;
+      } else if (typeof err === "string") {
+        message = err;
+      }
+
+      console.error("Error fetching product:", message);
+      toast.error(message);
     } finally {
       setLoading(false);
     }
@@ -74,7 +82,6 @@ const ProductCarousel = () => {
               className="basis-full flex justify-center md:basis-1/5 px-4 shrink-0"
             >
               <ProductCard {...product} />
-
             </CarouselItem>
           ))}
         </CarouselContent>

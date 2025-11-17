@@ -4,11 +4,30 @@ import React, { useState } from "react";
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 import OrdersTable from "./OrdersTable";
 
+interface OrderItem {
+  id: number;
+  product?: {
+    name: string;
+    image_url?: string | null;
+  };
+  size_id: string;
+  quantity: number;
+  price_at_purchase: number;
+}
+
+interface Order {
+  id: number;
+  billing_name: string;
+  total_amount: number;
+  created_at: string;
+  items: OrderItem[];
+}
+
 export default function AdminData() {
   const [productCount, setProductCount] = useState<number>(0);
   const [orderCount, setOrderCount] = useState<number>(0);
   const [userCount, setUserCount] = useState<number>(0);
-  const [orders, setOrders] = useState<any[]>([]);
+  const [orders, setOrders] = useState<Order[]>([]);
 
   // TODO: Check if orders table works properly
 
@@ -24,23 +43,39 @@ export default function AdminData() {
       } else {
         throw new Error("Failed to fetch counts!");
       }
-    } catch (err: any) {
-      console.error("Error fetching counts:", err.message);
+    } catch (err: unknown) {
+      let message = "Unknown error";
+
+      if (err instanceof Error) {
+        message = err.message;
+      } else if (typeof err === "string") {
+        message = err;
+      }
+
+      console.error("Error fetching counts:", message);
       return { productCount: 0, orderCount: 0, userCount: 0 };
     }
   };
 
   const fetchOrders = async () => {
     try {
-      const res = await fetch("/api/get-sales"); // your API route
+      const res = await fetch("/api/get-product/get-sales");
       const data = await res.json();
       if (res.ok) {
         setOrders(data);
       } else {
         console.error("Failed to fetch orders:", data.error);
       }
-    } catch (err: any) {
-      console.error("Error fetching orders:", err.message);
+    } catch (err: unknown) {
+      let message = "Unknown error";
+
+      if (err instanceof Error) {
+        message = err.message;
+      } else if (typeof err === "string") {
+        message = err;
+      }
+
+      console.error("Error fetching orders: ", message);
     }
   };
 

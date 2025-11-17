@@ -11,18 +11,28 @@ import { motion, AnimatePresence } from "framer-motion";
 import { useEffect, useState } from "react";
 import { Search, ShoppingCart, User, X, Menu } from "lucide-react";
 
+interface Product {
+  id: string;
+  name: string;
+  description: string;
+  price: number;
+  stock: number;
+  image_url?: string;
+}
+
 export default function Navbar() {
   const { user, isAdmin } = useUser();
   const router = useRouter();
   const [searchOpen, setSearchOpen] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [query, setQuery] = useState("");
-  const [results, setResults] = useState([]);
+  const [results, setResults] = useState<Product[]>([]);
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    function handleClickOutside(e) {
-      if (!e.target.closest(".mobile-search-area")) {
+    function handleClickOutside(e: MouseEvent) {
+      const target = e.target as HTMLElement;
+      if (!target.closest(".mobile-search-area")) {
         setQuery("");
       }
     }
@@ -33,7 +43,8 @@ export default function Navbar() {
   // Debounced search
   useEffect(() => {
     if (!query.trim()) {
-      setResults([]);
+      // setResults([]);
+      setTimeout(() => setResults([]), 0);
       return;
     }
 
@@ -102,7 +113,11 @@ export default function Navbar() {
                 >
                   <input
                     value={query}
-                    onChange={(e) => setQuery(e.target.value)}
+                    onChange={(e) => {
+                      const val = e.target.value;
+                      setQuery(e.target.value);
+                      if (!val.trim()) setResults([]);
+                    }}
                     placeholder="Search jackets..."
                     className="w-full px-4 py-2 bg-white border rounded-lg shadow-md outline-none text-sm"
                   />

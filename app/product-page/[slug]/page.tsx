@@ -1,9 +1,6 @@
-import { products, Product } from "@/lib/products";
 import Image from "next/image";
-import { addToCart } from "@/utils/addToCart";
 import ButtonTwo from "@/components/ui/button-two";
 import { createClient } from "@supabase/supabase-js";
-import { toast } from "sonner";
 
 export default async function ProductPage({
   params,

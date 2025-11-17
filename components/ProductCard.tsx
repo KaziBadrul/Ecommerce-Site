@@ -27,7 +27,7 @@ const ProductCard = ({ name, image_url, id, price }: Props) => {
         e.stopPropagation(); // prevent parent click
         router.push(`/product-page/${slug}`);
       }}
-      className="w-[20rem] h-[28rem] bg-white rounded-3xl shadow-md hover:shadow-xl border border-gray-200 flex flex-col p-5 transition-all duration-300 ease-in-out hover:-translate-y-2 hover:scale-[1.02] cursor-pointer"
+      className="w-[20rem] h-112 bg-white rounded-3xl shadow-md hover:shadow-xl border border-gray-200 flex flex-col p-5 transition-all duration-300 ease-in-out hover:-translate-y-2 hover:scale-[1.02] cursor-pointer"
     >
       {/* Image */}
       <div className="w-full h-[260px] rounded-2xl overflow-hidden relative">
@@ -40,7 +40,7 @@ const ProductCard = ({ name, image_url, id, price }: Props) => {
       </div>
 
       {/* Content */}
-      <div className="w-full mt-4 flex flex-col flex-grow">
+      <div className="w-full mt-4 flex flex-col grow">
         <p className="font-semibold text-lg text-gray-800 line-clamp-2">
           {name}
         </p>
