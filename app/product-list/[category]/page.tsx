@@ -97,7 +97,7 @@ export default async function ProductListPage({params}:Props) {
                             <p className="text-sm text-neutral-500">{p.subtitle}</p>
                         </div>
 
-                       
+
                         <div className="mt-4 flex items-center justify-between">
                             <span className="text-base font-semibold font-poppins">{p.price}</span>
                             <button className="px-4 py-2 rounded-4xl border bg-[#115acf] transition-all hover:bg-[#184a99] cursor-pointer">
