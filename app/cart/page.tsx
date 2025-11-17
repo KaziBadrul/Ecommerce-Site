@@ -26,9 +26,9 @@ const CartPage = () => {
 
   // Sync cartItems with localStorage whenever it changes
   useEffect(() => {
-    if (typeof window !== "undefined") {
-      localStorage.setItem("cartItem", JSON.stringify(cartItems));
-    }
+      if (typeof window !== "undefined") {
+          localStorage.setItem("cartItem", JSON.stringify(cartItems));
+      }
   }, [cartItems]);
 
   const increaseQuantity = (id: string) => {
