@@ -191,7 +191,9 @@ export default function Navbar() {
             <Button
               variant="outline"
               className="border-[#115acf] cursor-pointer text-blue-400 hover:bg-blue-50"
-              onClick={() => router.push("/admin")}
+              onClick={() => {
+                router.push("/admin");
+              }}
             >
               <p>Admin Panel</p>
             </Button>

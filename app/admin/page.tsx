@@ -1,34 +1,22 @@
-"use client";
+// app/admin/page.tsx
+import AdminContainer from "@/components/AdminContainer";
+import { createServerClient } from "@supabase/ssr";
 
-import { useUser } from "@/hooks/useUser";
-import { useState, useEffect } from "react";
-import { useRouter } from "next/navigation";
-import AdminDashboard from "@/components/AdminDashboard";
-import Sidebar from "@/components/Sidebar";
-
-export default function AdminPage() {
-  const { user, isAdmin, loading } = useUser();
-  const [selectedMenuItem, setSelectedMenuItem] = useState("dashboard");
-  const router = useRouter();
-
-  useEffect(() => {
-    if (!loading && (!user || !isAdmin)) {
-      router.replace("/");
+export default async function AdminPage() {
+  const supabase = createServerClient(
+    process.env.NEXT_PUBLIC_SUPABASE_URL!,
+    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
+    {
+      cookies: {
+        get(name: string) {
+          return null;
+        },
+      },
     }
-  }, [user, isAdmin, loading, router]);
-
-  if (loading) return <p>Loading...</p>;
-  if (!user || !isAdmin) return null;
-
-  return (
-    <div className="flex">
-      {/* Sidebar */}
-      <Sidebar selected={selectedMenuItem} onSelect={setSelectedMenuItem} />
-
-      {/* Main Content */}
-      <main className="ml-64 flex-1 p-6 bg-gray-50 min-h-screen">
-        <AdminDashboard selected={selectedMenuItem} />
-      </main>
-    </div>
   );
+
+  const { data } = await supabase.auth.getUser();
+  const user = data?.user;
+
+  return <AdminContainer />;
 }
