@@ -75,6 +75,8 @@ export function useUser() {
       }
     );
 
+    console.log("Status: ", user, isAdmin, loading);
+
     return () => {
       mounted = false;
       listener.subscription.unsubscribe();

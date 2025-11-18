@@ -21,7 +21,7 @@ interface Product {
 }
 
 export default function Navbar() {
-  const { user, isAdmin } = useUser();
+  const { user, isAdmin, loading: userLoading } = useUser();
   const router = useRouter();
   const [searchOpen, setSearchOpen] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -325,7 +325,7 @@ export default function Navbar() {
             </div>
 
             {/* Admin Button */}
-            {user && isAdmin && (
+            {!userLoading && user && isAdmin && (
               <Button
                 variant="outline"
                 className="border-[#115acf] cursor-pointer text-blue-400 hover:bg-blue-50"

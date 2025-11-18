@@ -27,6 +27,10 @@ const ProductCard = ({ name, image_url, id, price }: Props) => {
         e.stopPropagation(); // prevent parent click
         router.push(`/product-page/${slug}`);
       }}
+      onTouchStart={(e) => {
+        e.stopPropagation(); // prevent parent click
+        router.push(`/product-page/${slug}`);
+      }}
       className="w-[20rem] h-112 bg-white rounded-3xl shadow-md hover:shadow-xl border border-gray-200 flex flex-col p-5 transition-all duration-300 ease-in-out hover:-translate-y-2 hover:scale-[1.02] cursor-pointer"
     >
       {/* Image */}
