@@ -33,7 +33,7 @@ const App = () => {
           <div className="relative h-64 overflow-hidden rounded-sm">
             <Image
               src="/women-wear.jpg"
-              alt="Women’s wear"
+              alt="Women's wear"
               fill
               className="object-cover transform transition-transform duration-300 ease-in-out hover:scale-105"
             />
